@@ -1,6 +1,7 @@
 package com.inventiosystems.docker_compose;
 
 import com.inventiosystems.docker_compose.options.DockerComposeOptions;
+import com.inventiosystems.docker_compose.rm.DockerComposeRemove;
 import com.inventiosystems.docker_compose.start.DockerComposeStart;
 import com.inventiosystems.docker_compose.stop.DockerComposeStop;
 import com.inventiosystems.docker_compose.up.DockerComposeUp;
@@ -8,7 +9,7 @@ import com.inventiosystems.docker_compose.up.DockerComposeUp;
 /**
  * Object providing a DSL for docker-compose.
  */
-public class DockerComposeClient {
+public class DockerComposeClient implements HasCommand {
 
     private static final String COMMAND = "docker-compose";
 
@@ -55,21 +56,61 @@ public class DockerComposeClient {
 
     // Commands
 
+    /**
+     * Run the docker-compose rm command. The returned object provides a fluent API to specify the same information as could be provided on the cli.
+     *
+     * <pre>
+     *     docker-compose rm [options] [SERVICE...]
+     * </pre>
+     *
+     * @return the docker compose remove object
+     */
+    public DockerComposeRemove remove () {
+        return new DockerComposeRemove ( currentCommand );
+    }
+
+    /**
+     * Run the docker-compose start command. The returned object provides a fluent API to build up the command as if it was executed on the cli.
+     *
+     * <pre>
+     *     docker-compose start [SERVICE...]
+     * </pre>
+     *
+     * @return the docker compose start object
+     */
     public DockerComposeStart start () {
         return new DockerComposeStart ( currentCommand );
     }
 
+    /**
+     * Run the docker-compose stop command. The returned object provides a fluent API to build up the command as if it was executed on the cli.
+     *
+     * <pre>
+     *     docker-compose stop [options] [SERVICE...]
+     * </pre>
+     *
+     * @return the docker compose stop object
+     */
     public DockerComposeStop stop () {
         return new DockerComposeStop ( currentCommand );
     }
 
+    /**
+     * Run the docker-compose up command. The returned object provides a fluent API to build up the command as if it was executed on the cli.
+     *
+     * <pre>
+     *     docker-compose up [options] [--scale SERVICE=NUM...] [SERVICE...]
+     * </pre>
+     *
+     * @return the docker compose up object
+     */
     public DockerComposeUp up () {
         return new DockerComposeUp ( currentCommand );
     }
 
 
     @Override
-    public String toString () {
+    public String command () {
         return currentCommand;
     }
 }

@@ -1,5 +1,7 @@
 package com.inventiosystems.docker_compose.start;
 
+import com.inventiosystems.docker_compose.HasCommand;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -41,7 +43,7 @@ public class DockerComposeStart {
         return currentCommand;
     }
 
-    public class DockerComposeStartServices {
+    public class DockerComposeStartServices implements HasCommand {
 
         private final String currentCommand;
 
@@ -62,7 +64,7 @@ public class DockerComposeStart {
             return this;
         }
 
-        public String toString () {
+        public String command () {
             String finalCommand = this.currentCommand;
             if ( !services.isEmpty () ) {
                 for (String serviceName : services) {

@@ -1,5 +1,7 @@
 package com.inventiosystems.docker_compose.up;
 
+import com.inventiosystems.docker_compose.HasCommand;
+
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
@@ -7,7 +9,7 @@ import java.util.Set;
 /**
  * Object providing DSL for docker-compose up command.
  */
-public class DockerComposeUp {
+public class DockerComposeUp implements HasCommand {
 
     private static final String COMMAND = "up";
 
@@ -36,14 +38,20 @@ public class DockerComposeUp {
         return this;
     }
 
-    public DockerComposeUp withServices (Set<String> serviceNames) {
+    public DockerComposeUp withServices ( Set<String> serviceNames ) {
         services.addAll ( serviceNames );
         return this;
     }
 
     @Override
-    public String toString () {
-        return currentCommand;
+    public String command () {
+        String finalCommand = this.currentCommand;
+        if ( !this.services.isEmpty () ) {
+            for ( String serviceName : this.services ) {
+                finalCommand = finalCommand + " " + serviceName;
+            }
+        }
+        return finalCommand;
     }
 
 

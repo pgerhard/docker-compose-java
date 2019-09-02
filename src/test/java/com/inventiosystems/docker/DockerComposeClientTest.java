@@ -9,7 +9,7 @@ import static org.hamcrest.Matchers.is;
 /**
  * Tests to verify command strings created by docker compose client.
  */
-public class DockerComposeTest {
+public class DockerComposeClientTest {
 
     @Test
     public void verifyDockerComposeVersion () {
