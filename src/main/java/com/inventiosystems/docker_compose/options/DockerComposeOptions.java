@@ -1,5 +1,6 @@
 package com.inventiosystems.docker_compose.options;
 
+import com.inventiosystems.docker_compose.start.DockerComposeStart;
 import com.inventiosystems.docker_compose.stop.DockerComposeStop;
 import com.inventiosystems.docker_compose.up.DockerComposeUp;
 
@@ -33,6 +34,10 @@ public class DockerComposeOptions {
     }
 
     // Commands
+
+    public DockerComposeStart start () {
+        return new DockerComposeStart ( currentCommand );
+    }
 
     public DockerComposeStop stop () {
         return new DockerComposeStop ( currentCommand );

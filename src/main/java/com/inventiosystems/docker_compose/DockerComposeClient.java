@@ -1,6 +1,7 @@
 package com.inventiosystems.docker_compose;
 
 import com.inventiosystems.docker_compose.options.DockerComposeOptions;
+import com.inventiosystems.docker_compose.start.DockerComposeStart;
 import com.inventiosystems.docker_compose.stop.DockerComposeStop;
 import com.inventiosystems.docker_compose.up.DockerComposeUp;
 
@@ -15,6 +16,8 @@ public class DockerComposeClient {
 
     private static final String HELP = " --help";
 
+    private static final String VERSION = " --version";
+
     private String currentCommand;
 
     public DockerComposeClient () {
@@ -26,10 +29,14 @@ public class DockerComposeClient {
         return this;
     }
 
-    // Terminal method
+    // Terminal methods
 
     public String help () {
         return COMMAND + HELP;
+    }
+
+    public String version () {
+        return COMMAND + VERSION;
     }
 
     // Options
@@ -47,6 +54,10 @@ public class DockerComposeClient {
     }
 
     // Commands
+
+    public DockerComposeStart start () {
+        return new DockerComposeStart ( currentCommand );
+    }
 
     public DockerComposeStop stop () {
         return new DockerComposeStop ( currentCommand );
