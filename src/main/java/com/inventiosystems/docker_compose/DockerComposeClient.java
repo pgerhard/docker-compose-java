@@ -1,5 +1,6 @@
 package com.inventiosystems.docker_compose;
 
+import com.inventiosystems.docker_compose.down.DockerComposeDown;
 import com.inventiosystems.docker_compose.options.DockerComposeOptions;
 import com.inventiosystems.docker_compose.rm.DockerComposeRemove;
 import com.inventiosystems.docker_compose.start.DockerComposeStart;
@@ -55,6 +56,19 @@ public class DockerComposeClient implements HasCommand {
     }
 
     // Commands
+
+    /**
+     * Run the docker-compose down command. The returned object provides a fluent API to specify the same information as could be provided on the cli.
+     *
+     * <pre>
+     *     docker-compose down [options]
+     * </pre>
+     *
+     * @return the docker compose down object
+     */
+    public DockerComposeDown down () {
+        return new DockerComposeDown ( currentCommand );
+    }
 
     /**
      * Run the docker-compose rm command. The returned object provides a fluent API to specify the same information as could be provided on the cli.

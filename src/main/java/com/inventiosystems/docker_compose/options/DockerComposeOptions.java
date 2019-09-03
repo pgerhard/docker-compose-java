@@ -1,5 +1,6 @@
 package com.inventiosystems.docker_compose.options;
 
+import com.inventiosystems.docker_compose.down.DockerComposeDown;
 import com.inventiosystems.docker_compose.start.DockerComposeStart;
 import com.inventiosystems.docker_compose.stop.DockerComposeStop;
 import com.inventiosystems.docker_compose.up.DockerComposeUp;
@@ -34,6 +35,19 @@ public class DockerComposeOptions {
     }
 
     // Commands
+
+    /**
+     * Run the docker-compose down command. The returned object provides a fluent API to specify the same information as could be provided on the cli.
+     *
+     * <pre>
+     *     docker-compose down [options]
+     * </pre>
+     *
+     * @return the docker compose down object
+     */
+    public DockerComposeDown down () {
+        return new DockerComposeDown ( currentCommand );
+    }
 
     public DockerComposeStart start () {
         return new DockerComposeStart ( currentCommand );

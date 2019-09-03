@@ -46,7 +46,7 @@ public class DockerComposeDriverTest {
     }
 
     private void cleanDirectory ( File targetDirectory ) {
-        final String remove = new DockerComposeClient ().remove ().force ();
+        final DockerComposeRemove remove = new DockerComposeClient ().remove ().force ();
         new DockerComposeDriver ().initialize ( targetDirectory ).execute ( remove );
     }
 }

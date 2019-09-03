@@ -32,22 +32,23 @@ public class DockerComposeClientTest {
                 .compatibility ()
                 .up ()
                 .detach ()
-                .toString ();
+                .command ();
 
         assertThat ( dockerComposeFileUpWithCompatibilityAndDetach,
                 is ( "docker-compose --file docker-compose-infrastructure.yaml --compatibility up --detach" ) );
     }
 
+    @Test
     public void verifyDockerComposeUpWithServiceInCompatibility () {
         final String dockerComposeUpWithServicesInCompatibilityAndDetach = new DockerComposeClient ()
                 .compatibility ()
                 .up ()
                 .detach ()
                 .withServices ( "mssql-server", "maildev", "ipa-icsp-config-server" )
-                .toString ();
+                .command ();
 
         assertThat ( dockerComposeUpWithServicesInCompatibilityAndDetach,
-                is ( "docker-compose --compatibility up -d mssql-server maildev ipa-icsp-config-server" ) );
+                is ( "docker-compose --compatibility up --detach mssql-server maildev ipa-icsp-config-server" ) );
     }
 
     @Test
@@ -56,7 +57,7 @@ public class DockerComposeClientTest {
                 .compatibility ()
                 .start ()
                 .withServices ( "mssql-server", "maildev", "ipa-icsp-config-server" )
-                .toString ();
+                .command ();
 
         assertThat ( dockerComposeStartWithServiceInCompatibilityAndDetach,
                 is ( "docker-compose --compatibility start mssql-server maildev ipa-icsp-config-server" ));
