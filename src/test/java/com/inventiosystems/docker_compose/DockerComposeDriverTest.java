@@ -1,9 +1,6 @@
-package com.inventiosystems.docker;
+package com.inventiosystems.docker_compose;
 
-import com.inventiosystems.docker_compose.DockerComposeClient;
-import com.inventiosystems.docker_compose.DockerComposeDriver;
 import com.inventiosystems.docker_compose.rm.DockerComposeRemove;
-import com.inventiosystems.docker_compose.start.DockerComposeStart;
 import com.inventiosystems.docker_compose.up.DockerComposeUp;
 import org.junit.Test;
 

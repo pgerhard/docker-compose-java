@@ -1,0 +1,7 @@
+version: '3.7'
+
+services:
+  hello-world:
+    image: hello-world:latest
+    depends_on:
+      - another-service
