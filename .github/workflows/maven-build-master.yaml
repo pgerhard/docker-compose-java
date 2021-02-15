@@ -4,9 +4,11 @@ on:
   push:
     branches:
       - ci-cd
+      - master
 
 jobs:
   build:
+    environment: maven_build_release
     runs-on: ubuntu-latest
 
     steps:
@@ -15,7 +17,17 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 1.8
-      - name: Run bash script
-        run: ./.scripts/build-project.sh
-      - name: Build with Maven
-        run: mvn clean install
+      - name: Setup Maven
+        run: ./.scripts/configure-maven.sh
+      - name: Setup GPG
+        run: ./.scripts/setup-gpg.sh
+        env:
+          GPG_SIGNING_KEY: ${{ secrets.MAVEN_GPG_PRIVATE_KEY }}
+          GPG_PWD: ${{ secrets.GPG_PWD }}
+      - name: Build and Publish Project
+        run: ./.scripts/publish.sh
+        env:
+          OSSRH_TOKEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+          OSSRH_TOKEN_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
+          GPG_KEY: ${{ secrets.GPG_KEY }}
+          GPG_PWD: ${{ secrets.GPG_PWD }}
