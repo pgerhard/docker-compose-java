@@ -1,0 +1,8 @@
+version: '3.7'
+
+services:
+  hello-world-one:
+    image: hello-world:latest
+
+  hello-world-two:
+    image: hello-world:latest

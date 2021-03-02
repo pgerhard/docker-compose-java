@@ -1,4 +1,4 @@
-package com.inventiosystems.docker;
+package com.inventiosystems.docker_compose;
 
 import com.inventiosystems.docker_compose.DockerComposeClient;
 import org.junit.Test;
